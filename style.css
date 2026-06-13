@@ -1,0 +1,825 @@
+/* =========================================================
+   GAMEVAULT — styles.css
+   Metodología Mobile First | Paleta gamer oscura
+   ========================================================= */
+
+/* =========================================================
+   1. VARIABLES Y RESET
+   ========================================================= */
+:root {
+  /* Paleta */
+  --color-bg:          #0D0D1A;
+  --color-surface:     #13132A;
+  --color-card:        #1A1A35;
+  --color-card-hover:  #1F1F40;
+  --color-accent:      #7C3AED;
+  --color-accent-glow: rgba(124, 58, 237, 0.45);
+  --color-neon:        #06D6A0;
+  --color-neon-glow:   rgba(6, 214, 160, 0.35);
+  --color-text:        #F0F0FF;
+  --color-text-muted:  #8890A4;
+  --color-border:      rgba(124, 58, 237, 0.25);
+
+  /* Tipografía */
+  --font-display: 'Rajdhani', sans-serif;
+  --font-body:    'Inter', sans-serif;
+
+  /* Espaciado */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+
+  /* Radios */
+  --radius-sm:  8px;
+  --radius-md:  14px;
+  --radius-lg:  20px;
+  --radius-pill: 999px;
+
+  /* Sombras */
+  --shadow-card: 0 4px 20px rgba(0,0,0,0.5);
+  --shadow-accent: 0 0 16px var(--color-accent-glow);
+  --shadow-neon:   0 0 16px var(--color-neon-glow);
+
+  /* Transiciones */
+  --transition-fast: 0.18s ease;
+  --transition-med:  0.28s ease;
+
+  /* Altura header fijo */
+  --header-h: 118px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+
+/* =========================================================
+   2. HEADER FIJO
+   ========================================================= */
+.app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(13, 13, 26, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--space-md) var(--space-md) var(--space-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+/* Fila superior: logo + tagline */
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.brand-icon {
+  font-size: 1.4rem;
+  filter: drop-shadow(0 0 6px var(--color-accent));
+}
+
+.brand-name {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  background: linear-gradient(90deg, #A78BFA, var(--color-neon));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.brand-tagline {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+/* Barra de búsqueda */
+.search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  font-size: 1rem;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px 40px 10px 38px;
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.search-input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.search-input:focus {
+  border-color: var(--color-accent);
+  box-shadow: var(--shadow-accent);
+}
+
+/* Botón limpiar búsqueda */
+.search-clear {
+  position: absolute;
+  right: 10px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: #fff;
+  font-size: 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition-fast), transform var(--transition-fast);
+}
+
+.search-clear:active {
+  transform: scale(0.9);
+  background: #6D28D9;
+}
+
+/* =========================================================
+   3. CONTENIDO PRINCIPAL
+   ========================================================= */
+.app-main {
+  padding-top: var(--header-h);
+  padding-bottom: var(--space-xl);
+  min-height: 100vh;
+}
+
+/* =========================================================
+   4. FILTROS DE CATEGORÍA
+   ========================================================= */
+.filters-section {
+  padding: var(--space-md) 0 var(--space-sm);
+  position: sticky;
+  top: var(--header-h);
+  z-index: 90;
+  background: var(--color-bg);
+}
+
+.filters-scroll {
+  display: flex;
+  gap: var(--space-sm);
+  overflow-x: auto;
+  padding: 2px var(--space-md) var(--space-xs);
+  scrollbar-width: none; /* Firefox */
+}
+
+.filters-scroll::-webkit-scrollbar {
+  display: none; /* Chrome/Android */
+}
+
+.filter-btn {
+  flex-shrink: 0;
+  padding: 7px var(--space-md);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  border: 1.5px solid transparent;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 500;
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+  touch-action: manipulation;
+  min-height: 36px;
+}
+
+.filter-btn:active {
+  transform: scale(0.95);
+}
+
+.filter-btn--active {
+  background: var(--color-accent);
+  color: #fff;
+  border-color: var(--color-accent);
+  box-shadow: var(--shadow-accent);
+}
+
+/* =========================================================
+   5. META DE RESULTADOS
+   ========================================================= */
+.results-meta {
+  padding: var(--space-xs) var(--space-md) var(--space-sm);
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+/* =========================================================
+   6. CUADRÍCULA DEL CATÁLOGO
+   ========================================================= */
+.catalog-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+  padding: 0 var(--space-md);
+}
+
+/* =========================================================
+   7. TARJETA DE VIDEOJUEGO
+   ========================================================= */
+.game-card {
+  background: var(--color-card);
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--color-border);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-card);
+  transition:
+    transform var(--transition-med),
+    border-color var(--transition-med),
+    box-shadow var(--transition-med);
+  cursor: pointer;
+  touch-action: manipulation;
+  /* Animación de entrada */
+  animation: cardIn 0.35s ease backwards;
+}
+
+.game-card:active {
+  transform: scale(0.97);
+}
+
+/* Efecto neón al hover (tablet/desktop) */
+@media (hover: hover) {
+  .game-card:hover {
+    border-color: var(--color-neon);
+    box-shadow: var(--shadow-neon), var(--shadow-card);
+    transform: translateY(-3px);
+  }
+}
+
+/* Imagen / portada */
+.game-card__cover-wrap {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: var(--color-surface);
+}
+
+.game-card__cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+@media (hover: hover) {
+  .game-card:hover .game-card__cover {
+    transform: scale(1.06);
+  }
+}
+
+/* Badge de plataforma sobre la imagen */
+.game-card__platform {
+  position: absolute;
+  top: var(--space-xs);
+  right: var(--space-xs);
+  background: rgba(13, 13, 26, 0.82);
+  backdrop-filter: blur(6px);
+  border-radius: var(--radius-sm);
+  padding: 2px 6px;
+  font-size: 0.62rem;
+  color: var(--color-neon);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border: 1px solid rgba(6, 214, 160, 0.3);
+}
+
+/* Cuerpo de la tarjeta */
+.game-card__body {
+  padding: 10px var(--space-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.game-card__genre {
+  font-size: 0.63rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--color-accent);
+}
+
+.game-card__title {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--color-text);
+  display: -webkit-box;
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.game-card__year {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+}
+
+/* Botón "Más info" */
+.game-card__btn {
+  margin-top: auto;
+  padding-top: var(--space-xs);
+}
+
+.btn-more {
+  width: 100%;
+  padding: 8px 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  border: 1.5px solid var(--color-accent);
+  color: #A78BFA;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast),
+    box-shadow var(--transition-fast);
+  touch-action: manipulation;
+  min-height: 36px;
+}
+
+.btn-more:active,
+.btn-more:focus {
+  background: var(--color-accent);
+  color: #fff;
+  box-shadow: var(--shadow-accent);
+  outline: none;
+}
+
+@media (hover: hover) {
+  .btn-more:hover {
+    background: var(--color-accent);
+    color: #fff;
+    box-shadow: var(--shadow-accent);
+  }
+}
+
+/* =========================================================
+   8. ESTADO VACÍO (sin resultados)
+   ========================================================= */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-xl) var(--space-md);
+  gap: var(--space-md);
+  min-height: 40vh;
+}
+
+.empty-state__icon {
+  font-size: 3.5rem;
+  filter: grayscale(1) opacity(0.4);
+}
+
+.empty-state__title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+
+.empty-state__text {
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  max-width: 280px;
+}
+
+.btn-reset {
+  padding: 12px var(--space-xl);
+  border-radius: var(--radius-pill);
+  background: var(--color-accent);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  box-shadow: var(--shadow-accent);
+  transition: background var(--transition-fast), transform var(--transition-fast);
+  touch-action: manipulation;
+  min-height: 46px;
+}
+
+.btn-reset:active {
+  transform: scale(0.97);
+  background: #6D28D9;
+}
+
+/* =========================================================
+   9. MODAL DE DETALLE
+   ========================================================= */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(5, 5, 14, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  animation: fadeIn 0.22s ease;
+}
+
+/* Oculto con hidden, pero cuando es visible usa flex */
+.modal-overlay[hidden] {
+  display: none;
+}
+
+.modal-card {
+  background: var(--color-card);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  border: 1.5px solid var(--color-border);
+  border-bottom: none;
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  scrollbar-width: none;
+  position: relative;
+  animation: slideUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.modal-card::-webkit-scrollbar { display: none; }
+
+/* Botón cerrar */
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 10;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(13,13,26,0.7);
+  color: var(--color-text);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition-fast);
+  backdrop-filter: blur(4px);
+}
+
+.modal-close:active {
+  background: var(--color-accent);
+}
+
+/* Portada del modal */
+.modal-cover-wrap {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--color-surface);
+}
+
+.modal-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Degradado inferior sobre la imagen */
+.modal-cover-wrap::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(to bottom, transparent, var(--color-card));
+}
+
+/* Badge de plataformas en modal */
+.modal-platform-badge {
+  position: absolute;
+  bottom: 12px;
+  left: 14px;
+  z-index: 2;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.platform-tag {
+  background: rgba(124, 58, 237, 0.7);
+  border: 1px solid rgba(124,58,237,0.5);
+  border-radius: var(--radius-pill);
+  padding: 3px 10px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #D8B4FE;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Cuerpo del modal */
+.modal-body {
+  padding: var(--space-md) var(--space-md) var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.modal-genre {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-neon);
+}
+
+.modal-title {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--color-text);
+}
+
+.modal-year {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.modal-description {
+  font-size: 0.88rem;
+  color: #B8BFCC;
+  line-height: 1.65;
+}
+
+/* Estrellas de rating */
+.modal-rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: var(--space-xs);
+}
+
+.star {
+  font-size: 1.1rem;
+}
+
+.star--filled { color: #FBBF24; }
+.star--empty  { color: #374151; }
+
+.rating-label {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  margin-left: 6px;
+}
+
+/* =========================================================
+   10. PIE DE PÁGINA
+   ========================================================= */
+.app-footer {
+  text-align: center;
+  padding: var(--space-md);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  border-top: 1px solid var(--color-border);
+  margin-top: var(--space-lg);
+}
+
+.app-footer strong {
+  color: #A78BFA;
+}
+
+/* =========================================================
+   11. ANIMACIONES
+   ========================================================= */
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(50px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+/* Retrasos escalonados en las cards */
+.game-card:nth-child(1)  { animation-delay: 0.03s; }
+.game-card:nth-child(2)  { animation-delay: 0.06s; }
+.game-card:nth-child(3)  { animation-delay: 0.09s; }
+.game-card:nth-child(4)  { animation-delay: 0.12s; }
+.game-card:nth-child(5)  { animation-delay: 0.15s; }
+.game-card:nth-child(6)  { animation-delay: 0.18s; }
+.game-card:nth-child(7)  { animation-delay: 0.21s; }
+.game-card:nth-child(8)  { animation-delay: 0.24s; }
+.game-card:nth-child(n+9) { animation-delay: 0.27s; }
+
+/* Respeta preferencia de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  .game-card, .modal-card, .modal-overlay {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* =========================================================
+   12. MEDIA QUERIES — TABLET / DESKTOP
+   ========================================================= */
+
+/* Teléfonos grandes (≥400px) */
+@media (min-width: 400px) {
+  .brand-name { font-size: 1.65rem; }
+}
+
+/* Tablet (≥600px): 3 columnas */
+@media (min-width: 600px) {
+  :root { --header-h: 110px; }
+
+  .catalog-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .modal-overlay {
+    align-items: center;
+  }
+
+  .modal-card {
+    border-radius: var(--radius-lg);
+    border-bottom: 1.5px solid var(--color-border);
+    max-width: 440px;
+    max-height: 85vh;
+  }
+}
+
+/* Desktop (≥960px): 4 columnas */
+@media (min-width: 960px) {
+  .catalog-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-lg);
+    padding: 0 var(--space-xl);
+  }
+
+  .filters-section {
+    padding: var(--space-md) var(--space-xl) var(--space-sm);
+  }
+
+  .results-meta {
+    padding-left: var(--space-xl);
+  }
+
+  .app-header {
+    padding-left: var(--space-xl);
+    padding-right: var(--space-xl);
+  }
+}
+
+
+/* =========================================================
+   Botnes de acción en el modal alquilar juego
+   ========================================================= */
+
+   /*===================================
+BOTÓN ALQUILAR
+===================================*/
+
+.btn-rent{
+    width:100%;
+    margin-top:20px;
+    padding:14px;
+
+    background:linear-gradient(90deg,#7C3AED,#06D6A0);
+
+    color:white;
+
+    border:none;
+    border-radius:12px;
+
+    font-size:15px;
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+.btn-rent:hover{
+    transform:translateY(-2px);
+    box-shadow:0 0 18px rgba(124,58,237,.5);
+}
+
+.btn-rent:active{
+    transform:scale(.97);
+}
+
+
+/*===================================
+Formulario de alquiler
+===================================*/
+.rent-input{
+
+    width:100%;
+    margin-top:10px;
+    padding:12px;
+
+    background:#13132A;
+
+    border:1px solid rgba(124,58,237,.3);
+
+    border-radius:10px;
+
+    color:white;
+}
+
+.btn-confirm-rent{
+
+    width:100%;
+    margin-top:14px;
+    padding:14px;
+
+    background:#06D6A0;
+
+    color:#111;
+
+    border:none;
+
+    border-radius:10px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta name="theme-color" content="#0D0D1A" />
+  <title>GameVault — Catálogo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- ===== ENCABEZADO FIJO ===== -->
+  <header class="app-header">
+    <div class="header-top">
+      <div class="brand">
+        <span class="brand-icon">🎮</span>
+        <span class="brand-name">GameVault</span>
+      </div>
+      <span class="brand-tagline">Tu catálogo gamer</span>
+    </div>
+
+    <!-- Barra de búsqueda -->
+    <div class="search-wrapper">
+      <span class="search-icon">🔍</span>
+      <input type="search" id="searchInput" class="search-input" placeholder="Buscar por nombre, género o plataforma…"
+        autocomplete="off" autocorrect="off" spellcheck="false" />
+      <button class="search-clear" id="searchClear" aria-label="Limpiar búsqueda" hidden>✕</button>
+    </div>
+  </header>
+
+  <!-- ===== CONTENIDO PRINCIPAL ===== -->
+  <main class="app-main">
+
+    <!-- Filtros de categoría -->
+    <section class="filters-section" aria-label="Filtros por género">
+      <div class="filters-scroll">
+        <button class="filter-btn filter-btn--active" data-filter="all">Todos</button>
+        <button class="filter-btn" data-filter="Acción">Acción</button>
+        <button class="filter-btn" data-filter="Aventura">Aventura</button>
+        <button class="filter-btn" data-filter="RPG">RPG</button>
+        <button class="filter-btn" data-filter="Deportes">Deportes</button>
+        <button class="filter-btn" data-filter="Estrategia">Estrategia</button>
+        <button class="filter-btn" data-filter="Terror">Terror</button>
+      </div>
+    </section>
+
+    <!-- Contador de resultados -->
+    <div class="results-meta" id="resultsMeta">
+      <span id="resultsCount"></span>
+    </div>
+
+    <!-- Cuadrícula del catálogo -->
+    <section class="catalog-grid" id="catalogGrid" aria-label="Catálogo de videojuegos">
+      <!-- Las tarjetas se generan dinámicamente con JS -->
+    </section>
+
+    <!-- Mensaje de sin resultados -->
+    <div class="empty-state" id="emptyState" hidden>
+      <div class="empty-state__icon">🕹️</div>
+      <h2 class="empty-state__title">Sin resultados</h2>
+      <p class="empty-state__text">No encontramos juegos que coincidan con tu búsqueda.<br>Intenta con otro término o
+        categoría.</p>
+      <button class="btn-reset" id="btnReset">Ver todos los juegos</button>
+    </div>
+
+  </main>
+
+
+
+
+
+  <!-- ===== MODAL DE DETALLE ===== -->
+  <div class="modal-overlay" id="modalOverlay" hidden aria-modal="true" role="dialog">
+    <div class="modal-card">
+      <button class="modal-close" id="modalClose" aria-label="Cerrar">✕</button>
+      <div class="modal-cover-wrap">
+        <img class="modal-cover" id="modalCover" src="" alt="" />
+        <div class="modal-platform-badge" id="modalPlatforms"></div>
+      </div>
+      <div class="modal-body">
+        <span class="modal-genre" id="modalGenre"></span>
+        <h2 class="modal-title" id="modalTitle"></h2>
+        <p class="modal-year" id="modalYear"></p>
+        <p class="modal-description" id="modalDescription"></p>
+        <div class="modal-rating" id="modalRating"></div>
+
+        <button class="btn-rent" id="btnRent" data-id="">
+          🎮 Alquilar juego
+        </button>
+
+        <div id="rentForm" hidden>
+
+          <input type="text" id="nombreCliente" placeholder="Nombre del cliente" class="rent-input">
+
+          <input type="text" id="documentoCliente" placeholder="Documento" class="rent-input">
+
+          <input type="date" id="fechaAlquiler" class="rent-input">
+
+          <input type="number" id="diasAlquiler" placeholder="Días" class="rent-input">
+
+          <button class="btn-confirm-rent" id="btnConfirmRent">
+
+            Confirmar alquiler
+
+          </button>
+
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+  <!-- ===== PIE DE PÁGINA ===== -->
+  <footer class="app-footer">
+    <p>© 2025 <strong>GameVault</strong> · Todos los derechos reservados</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
